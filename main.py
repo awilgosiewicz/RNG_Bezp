@@ -1,16 +1,21 @@
-# This is a sample Python script.
+#import numpy as np
+#import scipy as sp
+#import matplotlib.pyplot as plt
+#import math
+#import audioop
+#import Pydub
+#import binascii
+#import pyaudio
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+# S - latest sample - variable name - cur_s
+# SP - last sample - prev_s
+# SPP - sample before last one - pp_s
 
+# n - amount of samples
+# n__th - correspondent sample
+# same for SP_n and SPP_n
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+wilczur = 10
+if wilczur == 10:
+    print("poka wilczura joł")
 
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
