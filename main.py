@@ -1,6 +1,9 @@
 import numpy as np
 import scipy
 import scipy as sp
+import matplotlib.pyplot as plt
+from scipy.io import wavfile
+from scipy import stats
 import math
 import audioop
 import pydub
@@ -14,17 +17,12 @@ import binascii
 # n__th - correspondent sample
 # same for SP_n and SPP_n
 
-from matplotlib import pyplot as plt
-from scipy.io import wavfile
-
-wilczur = 10
-if wilczur == 10:
-    print("poka wilczura joł")
-
 
 f_name= "white_noise_final2.wav"
 rate, data = sp.io.wavfile.read(f_name)
+bins=255
 
-for i in data:
-    print(data)
+figAudio, his = plt.subplots()
+his.hist([data],bins,range=[0,255])
+sp.stats.entropy(data, base=None) #nie wiem co z tym base, bo może być 2 a może być None, muszę o tym doczytać
 
