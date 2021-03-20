@@ -10,7 +10,7 @@ import binascii
 from collections import Counter
 
 number_of_samples = 100000
-f_name = "bajojajo.wav"
+f_name = "white_noise.wav"
 rate, data = wavfile.read(f_name)
 bins = 255
 print(len(data))
