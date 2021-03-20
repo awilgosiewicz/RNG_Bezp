@@ -6,23 +6,35 @@ from scipy.io import wavfile
 from scipy import stats
 import math
 import audioop
-import pydub
 import binascii
+from collections import Counter
 
-# S - latest sample - variable name - cur_s
-# SP - last sample - prev_s
-# SPP - sample before last one - pp_s
+number_of_samples = 100000
+f_name = "bajojajo.wav"
+rate, data = wavfile.read(f_name)
+bins = 255
+print(len(data))
+tab = []
+c = 0
+for x in data:
+    if c < number_of_samples:
+        if x < 2 ** 14 and x > -(2 ** 14):
+            x = x + 2 ** 14
+            x = x >> 7
+            tab.append(x)
+            c += 1
+print(rate)
 
-# n - amount of samples
-# n__th - correspondent sample
-# same for SP_n and SPP_n
+plt.hist([tab], bins, range=[0, 255])
+plt.show()
+print(max(tab))
+print(min(tab))
+count = Counter(tab)
+prob = []
+for x in count:
+    prob.append(count.get(x) / number_of_samples)
 
-
-f_name= "white_noise_final2.wav"
-rate, data = sp.io.wavfile.read(f_name)
-bins=255
-
-figAudio, his = plt.subplots()
-his.hist([data],bins,range=[0,255])
-sp.stats.entropy(data, base=None) #nie wiem co z tym base, bo może być 2 a może być None, muszę o tym doczytać
-
+entropy = 0
+for x in prob:
+    entropy += x * math.log2(1 / x)
+print(entropy)
