@@ -1,13 +1,8 @@
-import numpy as np
-import scipy
-import scipy as sp
-import matplotlib.pyplot as plt
-from scipy.io import wavfile
-from scipy import stats
-import math
-import audioop
-import binascii
 from collections import Counter
+
+import matplotlib.pyplot as plt
+import numpy as np
+from scipy.io import wavfile
 
 number_of_samples = 100000
 f_name = "white_noise.wav"
@@ -35,6 +30,24 @@ for x in count:
     prob.append(count.get(x) / number_of_samples)
 
 entropy = 0
-for x in prob:
-    entropy += x * math.log2(1 / x)
-print(entropy)
+
+#tutaj dzialalem ja i nie dziala pozdro
+threshold = 100
+watchdog = 0
+initial_samples = 1000
+temp_prev = [0]
+curr_samp = []
+runcnt = 0
+
+var = np.var(data[:initial_samples])
+halfvar = var / 2
+print(halfvar)
+
+for i in data[watchdog:threshold]:
+    for x in temp_prev:
+        x = x << 2
+        curr_samp.append(10 + (int.from_bytes(os.urandom(1), byteorder='big') * i + x) % 25)
+        if ((curr_samp - temp_prev) ** 2) < halfvar:
+            curr_samp.append(10 + temp_prev + ((curr_samp ^ watchdog)) % 25)
+print(curr_samp)
+
