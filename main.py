@@ -1,8 +1,6 @@
 import os
 from collections import Counter
 import math
-from typing import Any, Tuple, Union
-
 import matplotlib.pyplot as plt
 import numpy as np
 from scipy.io import wavfile
@@ -41,11 +39,12 @@ for x in prob:
 print('entropy:', entropy)
 
 
-threshold = 100
-watchdog = 0
+threshold: int = 100
+watchdog: int = 0
 initial_samples = 1000
 temp_prev = [0]
 curr_samp = []
+random_bit = [0]
 runcnt = 0
 sample = 0
 previous =0
@@ -57,14 +56,15 @@ print('halfvar:', halfvar)
 
 if watchdog < threshold:
     for i, sample in enumerate(sampleGet()[watchdog:threshold]):
-            print(i, sampleGet()[i])
             curr_samp.append(10 + (int.from_bytes(os.urandom(1), byteorder='big') * i + previous) % 25)
-            print(curr_samp[i])
             previous = curr_samp[i] << 2
             while ((curr_samp[i] - curr_samp[i-1]) ** 2) < halfvar:
                 curr_samp.append(10 + (curr_samp[i - 1] + ((curr_samp[i] ** watchdog) + runcnt)) % 25)
                 watchdog += 1
+                # TODO przesuwanie tablicy żeby pobrać inne sample
             else:
-                sampleGet()
-
-
+                print('dupa')
+                # TODO random_bit[i]
+                for x, random in enumerate(random_bit[0:7]):
+                    random = 1 & (curr_samp[i] ^ curr_samp[i-1] ^ curr_samp[i-2] )
+                    x += 1
