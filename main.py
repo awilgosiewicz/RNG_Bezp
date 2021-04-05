@@ -29,7 +29,7 @@ def fancyxor(x1, x2, x3):
     return result
 
 
-def hist_and_entropy(x, amount_of_samples):
+def count_entropy(x, amount_of_samples): #chuj ci w dupe xd
     #entropy
     count = Counter(x)
     prob = []
@@ -39,9 +39,7 @@ def hist_and_entropy(x, amount_of_samples):
     for x in prob:
         entropy += x * math.log2(1 / x)
     print('entropy: ', entropy)
-    #hist
-    plt.hist(x, bins = 256, range=[0, 255])
-    plt.show()
+
 
 
 number_of_samples = 100000
@@ -51,7 +49,9 @@ print('data length:', len(data))
 
 
 samples = sampleGet()
-hist_and_entropy(samples, number_of_samples)
+count_entropy(samples, number_of_samples)
+plt.hist(samples, bins=256, range=[0, 255])
+plt.show()
 
 threshold: int = 100
 watchdog: int = 0
@@ -99,4 +99,6 @@ while j < number_of_random_numbers * 8:
     j += 1
 
 print(random_numbers)
-hist_and_entropy(random_numbers, number_of_random_numbers)
+count_entropy(random_numbers, number_of_random_numbers)
+plt.hist(random_numbers, bins=256, range=[0, 255])
+plt.show()
