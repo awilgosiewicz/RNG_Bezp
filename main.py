@@ -29,7 +29,7 @@ def fancyxor(x1, x2, x3):
     return result
 
 
-def count_entropy(x, amount_of_samples): #chuj ci w dupe xd
+def count_entropy(x, amount_of_samples):
     #entropy
     count = Counter(x)
     prob = []
@@ -43,14 +43,17 @@ def count_entropy(x, amount_of_samples): #chuj ci w dupe xd
 
 
 number_of_samples = 100000
-f_name = "white_noise_final.wav"
+f_name = "hotncoldlpl.wav"
 rate, data = wavfile.read(f_name)
 print('data length:', len(data))
 
 
 samples = sampleGet()
 count_entropy(samples, number_of_samples)
-plt.hist(samples, bins=256, range=[0, 255])
+plt.hist(samples, bins=256, range=[0, 255], density=True)
+plt.title('Znormalizowany rozkład zmiennych losowych generowanych przez źródło szumu:')
+plt.xlabel('Wartosc probki (x)')
+plt.ylabel('Czestotliwosc wystepowania (p)')
 plt.show()
 
 threshold: int = 100
@@ -70,6 +73,8 @@ random_numbers = []
 
 var = np.var(sampleGet()[:initial_samples])
 halfvar = (var / 2) % 25
+if halfvar >20:
+    halfvar=(halfvar%10)/10
 print('halfvar:', halfvar)
 
 
@@ -100,5 +105,8 @@ while j < number_of_random_numbers * 8:
 
 print(random_numbers)
 count_entropy(random_numbers, number_of_random_numbers)
-plt.hist(random_numbers, bins=256, range=[0, 255])
+plt.hist(random_numbers, bins=256, range=[0, 255], density=True)
+plt.title('Znormalizowany rozkład zmiennych losowych po post-processingu:')
+plt.xlabel('Wartosc probki (x)')
+plt.ylabel('Czestotliwosc wystepowania (p)')
 plt.show()
