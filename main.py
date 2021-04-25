@@ -43,7 +43,7 @@ def count_entropy(x, amount_of_samples):
 
 
 number_of_samples = 100000
-f_name = "blue.wav"
+f_name = "hotncoldlpl.wav"
 rate, data = wavfile.read(f_name)
 print('data length:', len(data))
 
