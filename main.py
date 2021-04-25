@@ -43,7 +43,7 @@ def count_entropy(x, amount_of_samples):
 
 
 number_of_samples = 100000
-f_name = "hotncoldlpl.wav"
+f_name = "blue.wav"
 rate, data = wavfile.read(f_name)
 print('data length:', len(data))
 
@@ -75,6 +75,8 @@ var = np.var(sampleGet()[:initial_samples])
 halfvar = (var / 2) % 25
 if halfvar >20:
     halfvar=(halfvar%10)/10
+else:
+    halfvar = (var / 2) % 25
 print('halfvar:', halfvar)
 
 
@@ -110,3 +112,8 @@ plt.title('Znormalizowany rozkład zmiennych losowych po post-processingu:')
 plt.xlabel('Wartosc probki (x)')
 plt.ylabel('Czestotliwosc wystepowania (p)')
 plt.show()
+
+DataToSave=np.array(random_numbers)
+output_file = open('file.bin', 'wb')
+DataToSave.tofile(output_file)
+output_file.close()
