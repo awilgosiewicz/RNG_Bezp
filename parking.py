@@ -40,10 +40,11 @@ for i in range(0, 12000-1):
 
 print(crash_counter)
 
-both_arrays = np.column_stack((x_array, y_array))
 plt.figure()
-plt.plot(both_arrays, 'r.')
+plt.plot(x_array, y_array, 'r.')
 plt.show()
+
+both_arrays = np.column_stack((x_array, y_array))
 
 print(both_arrays.shape)
 sorted_arrays = np.sort(both_arrays, axis = 0)
