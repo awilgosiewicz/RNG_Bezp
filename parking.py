@@ -16,12 +16,12 @@ data = np.fromfile(data_2, dtype=np.uint32)
 
 x_array = []
 y_array = []
-for i in range(0,9600000):
-    if i % 2:
-        y_array.append(random.random()  * 100.0)
+
+for i in range(0, 1200000):
+    y_array.append(random.random()  * 100.0)
         #y_array.append(round(np.uint32(i)/256*100))
-    else:
-        x_array.append(random.random()  * 100.0)
+for i in range(0, 1200000):
+    x_array.append(random.random()  * 100.0)
         #x_array.append(round(np.uint32(i)/256*100))
 
 used_cars = 0
