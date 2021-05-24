@@ -1,6 +1,12 @@
 import random
 import math
 import scipy.stats as stats
+import numpy as np
+
+data_2 = open("file.bin", "rb") #rb musi być niby
+data = np.fromfile(data_2, dtype=np.uint32)
+data = data.tolist()
+print("data:", len(data))
 
 EXPECTED = [2.103, 5.779, 17.554, 46.732, 110.783,
             236.784, 460.944, 824.116, 1362.781, 2096.849,
@@ -12,11 +18,12 @@ EXPECTED = [2.103, 5.779, 17.554, 46.732, 110.783,
             30.666, 17.939, 10.324, 5.851, 3.269,
             1.803, 0.982, 1.121]
 
-NO_TESTS = 20
+NO_TESTS = 10
 
 p_vals = []
 chi_sqs = []
 
+temp = 0
 for test in range(NO_TESTS):
     j_freqs = [0] * 43
     for test_number in range(100000):
@@ -31,7 +38,6 @@ for test in range(NO_TESTS):
             j_freqs[0] += 1
         else:
             j_freqs[42] += 1
-
 
     #print(j_freqs)
 

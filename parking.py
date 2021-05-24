@@ -11,19 +11,22 @@ k = 1
 x = 0
 y = 0
 
-data_2 = open("fortnite.bin", "rb")
+data_2 = open("file.bin", "rb")
 data = np.fromfile(data_2, dtype=np.uint32)
+data = data.tolist()
 
 x_array = []
 y_array = []
 
-for i in range(0, 1200000):
-    y_array.append(random.random()  * 100.0)
-        #y_array.append(round(np.uint32(i)/256*100))
-for i in range(0, 1200000):
-    x_array.append(random.random()  * 100.0)
-        #x_array.append(round(np.uint32(i)/256*100))
 
+for i in range(0, 1200000):
+    #y_array.append(random.random()  * 100.0)
+    y_array.append(float(data[i])*100.0/256.0)
+    #print(y_array)
+for i in range(0, 1200000):
+    #x_array.append(random.random()  * 100.0)
+    x_array.append(float(data[i+1200000])*100.0/256.0)
+    #print(x_array)
 used_cars = 0
 successes = list()
 for test_nr in range(0, 100):
@@ -51,37 +54,3 @@ for test_nr in range(0, 100):
     print(test_nr, success_counter)
 print(successes)
 print(stats.kstest(successes, 'norm'))
-
-#plt.figure()
-#plt.plot(x_array, y_array, 'r.')
-#plt.show()
-#
-#both_arrays = np.column_stack((x_array, y_array))
-#
-#print(both_arrays.shape)
-#sorted_arrays = np.sort(both_arrays, axis = 0)
-#scaled_arrays = (sorted_arrays - sorted_arrays.mean()) / sorted_arrays.std()
-#
-#scaled_arrays = np.reshape(scaled_arrays, (24000, ))
-#
-#normal_numbers = np.random.normal(loc = 0, scale = 1, size = np.size(scaled_arrays))
-#normal_numbers = np.sort(normal_numbers)
-#
-#plt.figure()
-#plt.hist([scaled_arrays, normal_numbers], label = ['crash counter', 'normal'])
-#plt.xlabel('bins')
-#plt.ylabel('counts')
-#plt.legend(loc='best')
-#ax = plt.gca()
-#ax.set_facecolor ('#ffffff')
-#ax.grid(False)
-#plt.show()
-
-#z = success_counter - 3523.0 / 21.9
-#print(stats.kstest(z, 'norm'))
-#print(stats.ks_2samp(scaled_arrays, normal_numbers))
-
-
-
-
-

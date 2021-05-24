@@ -2,7 +2,8 @@ from collections import Counter
 import numpy as np
 import scipy.stats
 import random
-
+import math
+import matplotlib.pyplot as plt
 
 def count_the_ones(byte):
     counter = 0
@@ -27,17 +28,20 @@ def def_letter(x):
     return switcher.get(x)
 
 
-data_2 = open("fortnite.bin", "rb") #rb musi być niby
+data_2 = open("file.bin", "rb") #rb musi być niby
 data = np.fromfile(data_2, dtype=np.uint32)
+data = data.tolist()
+
 array = []
 words = []
 words5 = []
 words4 = []
 
+#TODO zara wracam
 
 for number in range(256000):
     array.append(int(random.random()*255.0))
-
+    #array.append(int((data[number])*255.0))
 i = 0
 while i < len(array) - 4:
     #ilość jedynek liczb

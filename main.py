@@ -43,7 +43,7 @@ def count_entropy(x, amount_of_samples):
 
 
 number_of_samples = 100000
-f_name = "hotncoldlpl.wav"
+f_name = "energymix.wav"
 rate, data = wavfile.read(f_name)
 print('data length:', len(data))
 
@@ -78,7 +78,7 @@ for test in range(int(len(data)/12000)):
     samples = sampleGet(start_num, end_num)
     start_num += 12000
     end_num += 12000
-    print(samples)
+    #print(samples)
     var = np.var(samples[:1000])
     halfvar = (var / 2) % 25
     if halfvar > 20:
@@ -111,17 +111,26 @@ for test in range(int(len(data)/12000)):
             random_numbers.append(random_byte)
             random_byte = 0
         j += 1
+    if len(random_numbers) > 1000:
+        break
 
-print(random_numbers)
+#print(random_numbers)
 count_entropy(random_numbers, len(random_numbers))
 print("liczba: " + str(len(random_numbers)))
+
+print("Type:", type(random_numbers))
 #plt.hist(random_numbers, bins=256, range=[0, 255], density=True)
 #plt.title('Znormalizowany rozkład zmiennych losowych po post-processingu:')
 #plt.xlabel('Wartosc probki (x)')
 #plt.ylabel('Czestotliwosc wystepowania (p)')
 #plt.show()
 #
-#DataToSave=np.array(random_numbers)
-#output_file = open('file.bin', 'wb')
-#DataToSave.tofile(output_file)
-#output_file.close()
+
+DataToSave = np.array(random_numbers)
+np.savetxt('filetxt.txt', DataToSave, delimiter = '\n',  fmt='%f')
+int_array = DataToSave.astype(int)
+output_file = open('file.bin', 'wb')
+arr = bytearray(int_array)
+output_file.write(arr)
+output_file.close()
+print(int_array)
