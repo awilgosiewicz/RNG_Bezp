@@ -111,7 +111,7 @@ for test in range(int(len(data)/12000)):
             random_numbers.append(random_byte)
             random_byte = 0
         j += 1
-    if len(random_numbers) > 1000:
+    if len(random_numbers) > 4000000:
         break
 
 #print(random_numbers)
@@ -119,17 +119,17 @@ count_entropy(random_numbers, len(random_numbers))
 print("liczba: " + str(len(random_numbers)))
 
 print("Type:", type(random_numbers))
-#plt.hist(random_numbers, bins=256, range=[0, 255], density=True)
-#plt.title('Znormalizowany rozkład zmiennych losowych po post-processingu:')
-#plt.xlabel('Wartosc probki (x)')
-#plt.ylabel('Czestotliwosc wystepowania (p)')
-#plt.show()
+plt.hist(random_numbers, bins=256, range=[0, 255], density=True)
+plt.title('Znormalizowany rozkład zmiennych losowych po post-processingu:')
+plt.xlabel('Wartosc probki (x)')
+plt.ylabel('Czestotliwosc wystepowania (p)')
+plt.show()
 #
 
 DataToSave = np.array(random_numbers)
-np.savetxt('filetxt.txt', DataToSave, delimiter = '\n',  fmt='%f')
+#np.savetxt('filetxt.txt', DataToSave, delimiter = '\n',  fmt='%f')
 int_array = DataToSave.astype(int)
-output_file = open('file.bin', 'wb')
+output_file = open('randomBig.bin', 'wb')
 arr = bytearray(int_array)
 output_file.write(arr)
 output_file.close()
